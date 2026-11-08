@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSC Preparation Test 2027 - Higher Mathematics Chapter 10</title>
+<style>
+  :root {
+    --primary-color: #1a5f7a;
+    --secondary-color: #159897;
+    --accent-color: #002b5b;
+    --light-bg: #f8f9fa;
+    --dark-text: #212529;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif, 'Siyam Rupali', 'Kalpurush';
+    background-color: #eef2f5;
+    color: var(--dark-text);
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .header {
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+  }
+
+  .header h1 { font-size: 22px; color: var(--primary-color); margin-bottom: 4px; }
+  .header p { font-size: 13.5px; margin: 2px 0; }
+
+  .info-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: #e9ecef;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .lang-btn-container, .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s ease-in-out;
+  }
+
+  .btn-lang { background-color: #6c757d; color: white; }
+  .btn-lang.active { background-color: var(--primary-color); }
+  .btn-start { background-color: #28a745; color: white; }
+  .btn-submit { background-color: #dc3545; color: white; display: none; }
+  .btn-print { background-color: #17a2b8; color: white; }
+  .btn-sol { background-color: #fd7e14; color: white; display: none; margin-top: 12px; }
+
+  button:hover { opacity: 0.9; }
+
+  .student-info-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+
+  .student-info-form input {
+    flex: 1;
+    min-width: 220px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .timer-box {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #d9534f;
+    margin-bottom: 15px;
+    display: none;
+    background: #fff3cd;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ffeeba;
+  }
+
+  /* Math Fraction & Integral Formatting */
+  .frac {
+    display: inline-flex;
+    vertical-align: middle;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 2px;
+    font-size: 0.92em;
+  }
+  .frac .num {
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
+    line-height: 1.1;
+  }
+  .frac .den {
+    padding-top: 1px;
+    line-height: 1.1;
+  }
+
+  .int-sub { font-size: 0.75em; vertical-align: sub; }
+  .int-sup { font-size: 0.75em; vertical-align: super; }
+
+  .question-card {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .question-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+
+  .option-label:hover { background-color: #f1f1f1; }
+
+  .option-label.correct {
+    background-color: #d4edda !important;
+    border-color: #28a745 !important;
+    color: #155724;
+    font-weight: bold;
+  }
+  .option-label.wrong {
+    background-color: #f8d7da !important;
+    border-color: #dc3545 !important;
+    color: #721c24;
+  }
+  .option-label.correct-target {
+    border: 2px dashed #28a745 !important;
+    background-color: #e8f5e9 !important;
+  }
+
+  .score-card {
+    display: none;
+    background: #f8f9fa;
+    color: #212529;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid var(--primary-color);
+  }
+
+  .score-summary-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .score-item {
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .score-item.total { background: #e2e3e5; color: #383d41; }
+  .score-item.right { background: #d4edda; color: #155724; }
+  .score-item.wrong { background: #f8d7da; color: #721c24; }
+  .score-item.skipped { background: #fff3cd; color: #856404; }
+
+  .solution-box {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+    font-size: 13.5px;
+    display: none;
+    line-height: 1.5;
+  }
+
+  /* Print Layout: A4 Dual Column */
+  @media print {
+    body { background-color: #fff; padding: 0; color: #000; }
+    .container { max-width: 100%; box-shadow: none; padding: 0; }
+    .lang-btn-container, .action-buttons, .timer-box, .score-card, .btn-sol { display: none !important; }
+    .student-info-form input { border: none; border-bottom: 1px solid #000; border-radius: 0; }
+    
+    @page { size: A4; margin: 8mm; }
+
+    .questions-container {
+      column-count: 2;
+      column-gap: 15px;
+    }
+
+    .question-card {
+      break-inside: avoid;
+      border: 1px solid #ddd;
+      padding: 6px;
+      margin-bottom: 6px;
+      page-break-inside: avoid;
+    }
+
+    .options {
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .option-label {
+      border: none;
+      padding: 0;
+      font-size: 11px;
+    }
+
+    .solution-box { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 id="title-text">H S C Preparation Test 2027</h1>
+    <p><strong>Instructor:</strong> MD. Rashid, Assistant Professor in Mathematics | <strong>Contact:</strong> 01711008786</p>
+    <p><strong>Subject:</strong> Higher Mathematics | <strong>Subject Code:</strong> &nbsp;&nbsp;&nbsp;&nbsp; | <strong>Chapter:</strong> 10 (Integration / যোগজীকরণ)</p>
+  </div>
+
+  <div class="info-bar">
+    <span><strong>Time:</strong> 25 Minutes</span>
+    <span><strong>MCQ:</strong> 25</span>
+    <span><strong>Full Marks:</strong> 25</span>
+  </div>
+
+  <div class="student-info-form">
+    <input type="text" id="studentName" placeholder="Student Name: ... ... ... ... ... ... ...">
+    <input type="text" id="schoolName" placeholder="School/College: ... ... ... ... ... ... ...">
+    <input type="text" id="examDate" placeholder="Date: ... ... ....">
+  </div>
+
+  <div class="lang-btn-container">
+    <button class="btn-lang active" id="btn-bn" onclick="setLanguage('bn')">Bangla Version</button>
+    <button class="btn-lang" id="btn-en" onclick="setLanguage('en')">English Version</button>
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn-start" id="btn-start" onclick="startExam()">Exam Start</button>
+    <button class="btn-print" onclick="window.print()">Print</button>
+    <button class="btn-submit" id="btn-submit" onclick="submitExam()">Submit</button>
+  </div>
+
+  <div class="timer-box" id="timerBox">
+    Start Time: <span id="startTime">--:--</span> | Remaining Time: <span id="timeRemaining">25:00</span> | End Time: <span id="endTime">--:--</span>
+  </div>
+
+  <div class="score-card" id="scoreCard">
+    <h2 id="scoreTitle">Exam Result</h2>
+    <p id="scoreStudentDetail" style="font-size: 15px; margin-top: 5px;"></p>
+    <div class="score-summary-grid">
+      <div class="score-item total" id="scoreObtained">Score: 0 / 25</div>
+      <div class="score-item right" id="scoreRight">Right: 0</div>
+      <div class="score-item wrong" id="scoreWrong">Wrong: 0</div>
+      <div class="score-item skipped" id="scoreSkipped">Skipped: 0</div>
+    </div>
+    <div>
+      <button class="btn-sol" id="btn-sol" onclick="toggleSolutions()">See Complete Solutions</button>
+    </div>
+  </div>
+
+  <div class="questions-container" id="questionsContainer"></div>
+</div>
+
+<script>
+function f(num, den) {
+  return `<span class="frac"><span class="num">${num}</span><span class="den">${den}</span></span>`;
+}
+
+const questionsData = [
+  {
+    id: 1,
+    bn: "∫ x⁻¹ dx এর মান কোনটি?",
+    en: "What is the value of ∫ x⁻¹ dx?",
+    options: ["ln x", "∞", "0", f("1","x²")],
+    correct: 0,
+    sol_bn: "∫ x⁻¹ dx = ∫ " + f("1","x") + " dx = ln|x| + c।",
+    sol_en: "∫ x⁻¹ dx = ∫ " + f("1","x") + " dx = ln|x| + c."
+  },
+  {
+    id: 2,
+    bn: "∫ " + f("dx", "(3 - 4x)<sup>2/3</sup>") + " = কোনটি?",
+    en: "∫ " + f("dx", "(3 - 4x)<sup>2/3</sup>") + " = ?",
+    options: [
+      "-" + f("3","4") + "(3 - 4x)<sup>1/3</sup>",
+      "-" + f("1","4") + "(3 - 4x)<sup>-1/3</sup>",
+      f("3","4") + "(3 - 4x)<sup>1/3</sup>",
+      "-" + f("1","3") + "(3 - 4x)<sup>1/3</sup>"
+    ],
+    correct: 0,
+    sol_bn: "∫ (3 - 4x)<sup>-2/3</sup> dx = " + f("(3 - 4x)<sup>1/3</sup>", "(-4) × (1/3)") + " = -" + f("3","4") + "(3 - 4x)<sup>1/3</sup> + c।",
+    sol_en: "∫ (3 - 4x)<sup>-2/3</sup> dx = -" + f("3","4") + "(3 - 4x)<sup>1/3</sup> + c."
+  },
+  {
+    id: 3,
+    bn: "∫ " + f("1", "1 + cos x") + " dx = কত?",
+    en: "What is the value of ∫ " + f("1", "1 + cos x") + " dx?",
+    options: ["cot " + f("x","2") + " + c", "tan² " + f("x","2") + " + c", "tan " + f("x","2") + " + c", "sec " + f("x","2") + " + c"],
+    correct: 2,
+    sol_bn: "1 + cos x = 2 cos²(x/2)।<br>∫ " + f("1", "2 cos²(x/2)") + " dx = " + f("1","2") + " ∫ sec²(x/2) dx = tan(x/2) + c।",
+    sol_en: "1 + cos x = 2 cos²(x/2).<br>∫ " + f("1", "2 cos²(x/2)") + " dx = tan(x/2) + c."
+  },
+  {
+    id: 4,
+    bn: "∫ f(x) dx = x + e²ˣ হলে, f(x) কোনটি?",
+    en: "If ∫ f(x) dx = x + e²ˣ, which one is f(x)?",
+    options: ["1 + 2e²ˣ", "1 + e²ˣ", "1 + " + f("1","2e²ˣ"), "x² + e²ˣ"],
+    correct: 0,
+    sol_bn: "f(x) = " + f("d","dx") + "(x + e²ˣ) = 1 + 2e²ˣ।",
+    sol_en: "f(x) = " + f("d","dx") + "(x + e²ˣ) = 1 + 2e²ˣ."
+  },
+  {
+    id: 5,
+    bn: "∫ " + f("sin x + cos x", "√(1 + sin 2x)") + " dx = কত?",
+    en: "What is the value of ∫ " + f("sin x + cos x", "√(1 + sin 2x)") + " dx?",
+    options: ["x² + c", "2x + c", "x + c", "c"],
+    correct: 2,
+    sol_bn: "1 + sin 2x = (sin x + cos x)²।<br>∫ " + f("sin x + cos x", "sin x + cos x") + " dx = ∫ 1 dx = x + c।",
+    sol_en: "1 + sin 2x = (sin x + cos x)². √ = sin x + cos x.<br>∫ 1 dx = x + c."
+  },
+  {
+    id: 6,
+    bn: "∫ " + f("dx", "eˣ + e⁻ˣ") + " = কত?",
+    en: "∫ " + f("dx", "eˣ + e⁻ˣ") + " = ?",
+    options: [
+      "2(eˣ + 1)⁻¹ + c",
+      "tan⁻¹(eˣ) + c",
+      "-" + f("1", "2e²ˣ") + " + c",
+      "-" + f("1", "2(e²ˣ + 1)") + " + c"
+    ],
+    correct: 1,
+    sol_bn: "∫ " + f("eˣ dx", "e²ˣ + 1") + "। eˣ = z ধরলে eˣ dx = dz।<br>∫ " + f("dz", "z² + 1") + " = tan⁻¹(eˣ) + c।",
+    sol_en: "∫ " + f("eˣ dx", "e²ˣ + 1") + ". Let eˣ = z ⇒ dz = eˣ dx.<br>∫ " + f("dz", "z² + 1") + " = tan⁻¹(eˣ) + c."
+  },
+  {
+    id: 7,
+    bn: "∫ 2ˣ dx = f(x) + c হলে, f(x) এর মান কত?",
+    en: "If ∫ 2ˣ dx = f(x) + c, what is the value of f(x)?",
+    options: ["2ˣ", f("2ˣ", "logₑ 2"), "2ˣ logₑ 2", f("2ˣ⁺¹", "x + 1")],
+    correct: 1,
+    sol_bn: "∫ 2ˣ dx = " + f("2ˣ", "ln 2") + " + c ⇒ f(x) = " + f("2ˣ", "logₑ 2") + "।",
+    sol_en: "∫ 2ˣ dx = " + f("2ˣ", "ln 2") + " + c ⇒ f(x) = " + f("2ˣ", "logₑ 2") + "."
+  },
+  {
+    id: 8,
+    bn: "∫ x ln x dx এর মান নিচের কোনটি?",
+    en: "Which of the following is the value of ∫ x ln x dx?",
+    options: [
+      f("x²", "2") + " ln x - " + f("x²", "4") + " + c",
+      f("x²", "2") + " ln x + " + f("x²", "4") + " + c",
+      "x² ln x - " + f("x²", "4") + " + c",
+      "None"
+    ],
+    correct: 0,
+    sol_bn: "u = ln x, v = x।<br>∫ x ln x dx = " + f("x²", "2") + " ln x - ∫ " + f("x²", "2") + " · " + f("1", "x") + " dx = " + f("x²", "2") + " ln x - " + f("x²", "4") + " + c।",
+    sol_en: "Using Integration by Parts:<br>" + f("x²", "2") + " ln x - " + f("x²", "4") + " + c."
+  },
+  {
+    id: 9,
+    bn: "যদি ∫ Q(x) dx = ln(ln x) + C হয়, তবে Q(x) = ?",
+    en: "If ∫ Q(x) dx = ln(ln x) + C, then Q(x) = ?",
+    options: ["x ln(ln x) + x", f("1", "x ln x"), f("x", "ln x"), "x ln x"],
+    correct: 1,
+    sol_bn: "Q(x) = " + f("d","dx") + " ln(ln x) = " + f("1", "x ln x") + "।",
+    sol_en: "Q(x) = " + f("d","dx") + " ln(ln x) = " + f("1", "x ln x") + "."
+  },
+  {
+    id: 10,
+    bn: "∫ " + f("x", "√(1 + x²)") + " dx = f(x) + c হলে, f(x) = ?",
+    en: "If ∫ " + f("x", "√(1 + x²)") + " dx = f(x) + c, then f(x) = ?",
+    options: ["ln(√(1 + x²))", "tan⁻¹ x", "√(1 + x²)", "sin⁻¹ x"],
+    correct: 2,
+    sol_bn: "∫ " + f("2x dx", "2√(1 + x²)") + " = √(1 + x²) + c ⇒ f(x) = √(1 + x²)।",
+    sol_en: "∫ " + f("x dx", "√(1 + x²)") + " = √(1 + x²) + c ⇒ f(x) = √(1 + x²)."
+  },
+  {
+    id: 11,
+    bn: "∫ e<sup>eˣ</sup> eˣ dx = ?",
+    en: "∫ e<sup>eˣ</sup> eˣ dx = ?",
+    options: ["e<sup>eˣ</sup> + c", "eˣ + c", "e<sup>x+eˣ</sup> + c", "x + c"],
+    correct: 0,
+    sol_bn: "eˣ = z ⇒ eˣ dx = dz।<br>∫ eᶻ dz = e<sup>eˣ</sup> + c।",
+    sol_en: "Let eˣ = z ⇒ eˣ dx = dz.<br>∫ eᶻ dz = e<sup>eˣ</sup> + c."
+  },
+  {
+    id: 12,
+    bn: "∫ " + f("dx", "eˣ + e⁻ˣ") + " এর মান কত?",
+    en: "What is the value of ∫ " + f("dx", "eˣ + e⁻ˣ") + "?",
+    options: ["tan⁻¹(e⁻ˣ) + c", "tan⁻¹(eˣ) + c", "tan(e⁻ˣ) + c", "tan(eˣ) + c"],
+    correct: 1,
+    sol_bn: "∫ " + f("eˣ dx", "e²ˣ + 1") + " = tan⁻¹(eˣ) + c।",
+    sol_en: "∫ " + f("eˣ dx", "e²ˣ + 1") + " = tan⁻¹(eˣ) + c."
+  },
+  {
+    id: 13,
+    bn: "∫<span class='int-sub'>0</span><span class='int-sup'>π/4</span> tan²x dx এর মান কত?",
+    en: "What is the value of ∫<span class='int-sub'>0</span><span class='int-sup'>π/4</span> tan²x dx?",
+    options: ["1 + " + f("π","4"), "1 - " + f("π","4"), "1 + " + f("π","3"), "1 - " + f("π","3")],
+    correct: 1,
+    sol_bn: "[tan x - x]<span class='int-sub'>0</span><span class='int-sup'>π/4</span> = 1 - " + f("π","4") + "।",
+    sol_en: "[tan x - x]<span class='int-sub'>0</span><span class='int-sup'>π/4</span> = 1 - " + f("π","4") + "."
+  },
+  {
+    id: 14,
+    bn: "∫ " + f("eˣ(1 + x)", "cos²(x eˣ)") + " dx = f(x) + c হলে, f(x) = ?",
+    en: "If ∫ " + f("eˣ(1 + x)", "cos²(x eˣ)") + " dx = f(x) + c, then f(x) = ?",
+    options: ["sin(x eˣ)", "cot(x eˣ)", "tan(x eˣ)", "sec(x eˣ)"],
+    correct: 2,
+    sol_bn: "x eˣ = z ⇒ eˣ(1 + x) dx = dz।<br>∫ sec²(z) dz = tan(x eˣ) + c।",
+    sol_en: "Let x eˣ = z ⇒ eˣ(1 + x) dx = dz.<br>∫ sec²(z) dz = tan(x eˣ) + c."
+  },
+  {
+    id: 15,
+    bn: "∫ " + f("sec²(cot⁻¹x)", "1 + x²") + " dx এর মান কত?",
+    en: "What is the value of ∫ " + f("sec²(cot⁻¹x)", "1 + x²") + " dx?",
+    options: ["x + c", "-x + c", f("1","x") + " + c", "-" + f("1","x") + " + c"],
+    correct: 1,
+    sol_bn: "cot⁻¹x = z ⇒ -" + f("dx", "1+x²") + " = dz।<br>-∫ sec²z dz = -tan(cot⁻¹x) = -x + c।",
+    sol_en: "Let cot⁻¹x = z ⇒ -dz = dx/(1+x²).<br>-∫ sec²z dz = -tan(cot⁻¹x) = -x + c."
+  },
+  {
+    id: 16,
+    bn: "∫ " + f("1 + tan²x", "(1 + tan x)²") + " dx এর মান কোনটি?",
+    en: "Which one is the value of ∫ " + f("1 + tan²x", "(1 + tan x)²") + " dx?",
+    options: [
+      f("1", "1 + cot x") + " + c",
+      "-" + f("1", "1 + cos x") + " + c",
+      f("1", "1 - tan x") + " + c",
+      "-" + f("1", "1 + tan x") + " + c"
+    ],
+    correct: 3,
+    sol_bn: "1 + tan x = z ⇒ sec²x dx = dz।<br>∫ z⁻² dz = -" + f("1", "1 + tan x") + " + c।",
+    sol_en: "Let 1 + tan x = z ⇒ sec²x dx = dz.<br>∫ z⁻² dz = -" + f("1", "1 + tan x") + " + c."
+  },
+  {
+    id: 17,
+    bn: "∫ " + f("√tan x", "sin x cos x") + " dx এর মান কোনটি?",
+    en: "Which one is the value of ∫ " + f("√tan x", "sin x cos x") + " dx?",
+    options: ["tan x + c", "2√tan x + c", "cot x + c", f("√tan x", "2") + " + c"],
+    correct: 1,
+    sol_bn: "∫ " + f("sec²x", "√tan x") + " dx = 2√tan x + c।",
+    sol_en: "∫ " + f("sec²x", "√tan x") + " dx = 2√tan x + c."
+  },
+  {
+    id: 18,
+    bn: "∫ " + f("dx", "cos²x √(1 + tan x)") + " এর মান কোনটি?",
+    en: "Which one is the value of ∫ " + f("dx", "cos²x √(1 + tan x)") + "?",
+    options: ["2√(1 + tan x) + c", f("1", "2") + "√(1 + tan x) + c", "√(1 + tan x) + c", "None"],
+    correct: 0,
+    sol_bn: "∫ " + f("sec²x dx", "√(1 + tan x)") + " = 2√(1 + tan x) + c।",
+    sol_en: "∫ " + f("sec²x dx", "√(1 + tan x)") + " = 2√(1 + tan x) + c."
+  },
+  {
+    id: 19,
+    bn: "∫ xˣ (1 + log x) dx = ?",
+    en: "∫ xˣ (1 + log x) dx = ?",
+    options: ["x log x + c", "log(xˣ + 1) + c", "c + xˣ log x", "xˣ + c"],
+    correct: 3,
+    sol_bn: f("d","dx") + "(xˣ) = xˣ (1 + log x)।<br>অতএব, ∫ xˣ (1 + log x) dx = xˣ + c।",
+    sol_en: f("d","dx") + "(xˣ) = xˣ (1 + log x).<br>Thus, ∫ xˣ (1 + log x) dx = xˣ + c."
+  },
+  {
+    id: 20,
+    bn: "∫ f(x) dx = " + f("eˣ", "x + 1") + " + c হলে, f(x) = কত?",
+    en: "If ∫ f(x) dx = " + f("eˣ", "x + 1") + " + c, then f(x) = ?",
+    options: [
+      f("eˣ", "(x + 1)²"),
+      f("x eˣ", "(x + 1)²"),
+      f("eˣ", "x + 1"),
+      f("x eˣ", "x + 1")
+    ],
+    correct: 1,
+    sol_bn: "f(x) = " + f("d","dx") + "(" + f("eˣ", "x + 1") + ") = " + f("x eˣ", "(x + 1)²") + "।",
+    sol_en: "f(x) = " + f("d","dx") + "(" + f("eˣ", "x + 1") + ") = " + f("x eˣ", "(x + 1)²") + "."
+  },
+  {
+    id: 21,
+    bn: "∫ f(x) dx = " + f("sin x", "1 + cos x") + " + c হলে, f(x) = কত?",
+    en: "If ∫ f(x) dx = " + f("sin x", "1 + cos x") + " + c, then f(x) = ?",
+    options: [
+      f("1","2") + " cos² " + f("x","2"),
+      f("1","2") + " sec² " + f("x","2"),
+      f("1","2") + " tan² " + f("x","2"),
+      f("1","2") + " cosec² " + f("x","2")
+    ],
+    correct: 1,
+    sol_bn: f("sin x", "1 + cos x") + " = tan(" + f("x","2") + ")।<br>f(x) = " + f("d","dx") + " tan(" + f("x","2") + ") = " + f("1","2") + " sec²(" + f("x","2") + ")।",
+    sol_en: f("sin x", "1 + cos x") + " = tan(x/2).<br>f(x) = " + f("d","dx") + " tan(x/2) = " + f("1","2") + " sec²(x/2)."
+  },
+  {
+    id: 22,
+    bn: "∫ " + f("tan x", "ln cos x") + " dx এর সমাধান নিচের কোনটি?",
+    en: "Which of the following is the solution to ∫ " + f("tan x", "ln cos x") + " dx?",
+    options: [
+      "-ln(ln cos x) + c",
+      "-ln(cot x) + c",
+      "-ln(cos x) + c",
+      "-ln(ln cot x) + c"
+    ],
+    correct: 0,
+    sol_bn: "ln cos x = z ⇒ -tan x dx = dz।<br>-∫ " + f("dz", "z") + " = -ln(ln cos x) + c।",
+    sol_en: "Let z = ln cos x ⇒ dz = -tan x dx.<br>-∫ " + f("dz","z") + " = -ln(ln cos x) + c."
+  },
+  {
+    id: 23,
+    bn: "∫ cos x e<sup>sin x</sup> dx এর সমাধান কোনটি?",
+    en: "Which of the following is the solution to ∫ cos x e<sup>sin x</sup> dx?",
+    options: ["e<sup>cos x</sup> + c", "-e<sup>cos x</sup> + c", "e<sup>sin x</sup> + c", "-e<sup>sin x</sup> + c"],
+    correct: 2,
+    sol_bn: "sin x = z ⇒ cos x dx = dz।<br>∫ eᶻ dz = e<sup>sin x</sup> + c।",
+    sol_en: "Let sin x = z ⇒ cos x dx = dz.<br>∫ eᶻ dz = e<sup>sin x</sup> + c."
+  },
+  {
+    id: 24,
+    bn: "∫ " + f("e<sup>cos⁻¹x</sup>", "√(1 - x²)") + " dx এর মান কত?",
+    en: "What is the value of ∫ " + f("e<sup>cos⁻¹x</sup>", "√(1 - x²)") + " dx?",
+    options: [
+      "e<sup>cos⁻¹x</sup> + c",
+      f("e<sup>cos⁻¹x</sup>", "√(1 - x²)") + " + c",
+      "-e<sup>cos⁻¹x</sup> + c",
+      "-" + f("e<sup>cos⁻¹x</sup>", "√(1 - x²)") + " + c"
+    ],
+    correct: 2,
+    sol_bn: "cos⁻¹x = z ⇒ -" + f("dx", "√(1 - x²)") + " = dz।<br>-∫ eᶻ dz = -e<sup>cos⁻¹x</sup> + c।",
+    sol_en: "Let cos⁻¹x = z ⇒ -" + f("dx", "√(1 - x²)") + " = dz.<br>-∫ eᶻ dz = -e<sup>cos⁻¹x</sup> + c."
+  },
+  {
+    id: 25,
+    bn: "∫ f(x) dx = " + f("1", "2a") + " ln|" + f("a + x", "a - x") + "| + c হলে f(x) এর মান কত?",
+    en: "If ∫ f(x) dx = " + f("1", "2a") + " ln|" + f("a + x", "a - x") + "| + c, what is the value of f(x)?",
+    options: [
+      f("1", "√(a² + x²)"),
+      f("1", "a² - x²"),
+      f("1", "a² + x²"),
+      f("1", "√(a² - x²)")
+    ],
+    correct: 1,
+    sol_bn: "আমরা জানি, ∫ " + f("1", "a² - x²") + " dx = " + f("1", "2a") + " ln|" + f("a + x", "a - x") + "| + c।<br>সুতরাং, f(x) = " + f("1", "a² - x²") + "।",
+    sol_en: "Standard formula: ∫ " + f("1", "a² - x²") + " dx = " + f("1", "2a") + " ln|" + f("a + x", "a - x") + "| + c.<br>Therefore, f(x) = " + f("1", "a² - x²") + "."
+  }
+];
+
+let currentLang = 'bn';
+let timerInterval = null;
+let isExamSubmitted = false;
+
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+
+  questionsData.forEach((q, index) => {
+    const qCard = document.createElement('div');
+    qCard.className = 'question-card';
+    qCard.id = `q-card-${index}`;
+
+    const qText = currentLang === 'bn' ? `${index + 1}. ${q.bn}` : `${index + 1}. ${q.en}`;
+    const optionPrefixes = currentLang === 'bn' ? ['ক', 'খ', 'গ', 'ঘ'] : ['A', 'B', 'C', 'D'];
+
+    let optionsHTML = '';
+    q.options.forEach((opt, optIdx) => {
+      optionsHTML += `
+        <label class="option-label" id="opt-label-${index}-${optIdx}">
+          <input type="radio" name="question_${index}" value="${optIdx}" ${isExamSubmitted ? 'disabled' : ''}>
+          <span>(${optionPrefixes[optIdx]}) ${opt}</span>
+        </label>
+      `;
+    });
+
+    const solText = currentLang === 'bn' ? q.sol_bn : q.sol_en;
+
+    qCard.innerHTML = `
+      <div class="question-title">${qText}</div>
+      <div class="options">${optionsHTML}</div>
+      <div class="solution-box" id="sol-box-${index}">
+        <strong>${currentLang === 'bn' ? 'বিস্তারিত সমাধান:' : 'Complete Solution:'}</strong><br>${solText}
+      </div>
+    `;
+
+    container.appendChild(qCard);
+  });
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  renderQuestions();
+}
+
+function startExam() {
+  const studentName = document.getElementById('studentName').value.trim();
+  if(!studentName) {
+    alert(currentLang === 'bn' ? 'অনুগ্রহ করে পরীক্ষার পূর্বে শিক্ষার্থীর নাম লিখুন।' : 'Please enter Student Name before starting.');
+    return;
+  }
+
+  document.getElementById('btn-start').style.display = 'none';
+  document.getElementById('btn-submit').style.display = 'inline-block';
+  document.getElementById('timerBox').style.display = 'block';
+
+  const now = new Date();
+  const startTimeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const endTime = new Date(now.getTime() + 25 * 60000);
+  const endTimeStr = endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  document.getElementById('startTime').innerText = startTimeStr;
+  document.getElementById('endTime').innerText = endTimeStr;
+
+  let totalSeconds = 25 * 60;
+
+  timerInterval = setInterval(() => {
+    totalSeconds--;
+    if (totalSeconds <= 0) {
+      clearInterval(timerInterval);
+      submitExam();
+    } else {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      document.getElementById('timeRemaining').innerText = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+  }, 1000);
+}
+
+function submitExam() {
+  if (isExamSubmitted) return;
+  isExamSubmitted = true;
+  clearInterval(timerInterval);
+
+  document.getElementById('btn-submit').style.display = 'none';
+
+  let rightCount = 0;
+  let wrongCount = 0;
+  let skippedCount = 0;
+
+  questionsData.forEach((q, index) => {
+    const selected = document.querySelector(`input[name="question_${index}"]:checked`);
+    const correctIdx = q.correct;
+
+    if (selected) {
+      const userAns = parseInt(selected.value);
+      if (userAns === correctIdx) {
+        rightCount++;
+        document.getElementById(`opt-label-${index}-${userAns}`).classList.add('correct');
+      } else {
+        wrongCount++;
+        document.getElementById(`opt-label-${index}-${userAns}`).classList.add('wrong');
+        document.getElementById(`opt-label-${index}-${correctIdx}`).classList.add('correct-target');
+      }
+    } else {
+      skippedCount++;
+      document.getElementById(`opt-label-${index}-${correctIdx}`).classList.add('correct-target');
+    }
+  });
+
+  const sName = document.getElementById('studentName').value || 'N/A';
+  const sSchool = document.getElementById('schoolName').value || 'N/A';
+  
+  document.getElementById('scoreCard').style.display = 'block';
+  document.getElementById('scoreStudentDetail').innerText = `Student Name: ${sName} | School/College: ${sSchool}`;
+  
+  document.getElementById('scoreObtained').innerText = currentLang === 'bn' 
+    ? `প্রাপ্ত নম্বর: ${rightCount} / ২৫` 
+    : `Score: ${rightCount} / 25`;
+    
+  document.getElementById('scoreRight').innerText = currentLang === 'bn' 
+    ? `সঠিক: ${rightCount}` 
+    : `Right: ${rightCount}`;
+    
+  document.getElementById('scoreWrong').innerText = currentLang === 'bn' 
+    ? `ভুল: ${wrongCount}` 
+    : `Wrong: ${wrongCount}`;
+
+  document.getElementById('scoreSkipped').innerText = currentLang === 'bn' 
+    ? `উত্তরহীন (Skipped): ${skippedCount}` 
+    : `Skipped: ${skippedCount}`;
+
+  document.getElementById('btn-sol').style.display = 'inline-block';
+}
+
+function toggleSolutions() {
+  const solBoxes = document.querySelectorAll('.solution-box');
+  solBoxes.forEach(box => {
+    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+  });
+}
+
+renderQuestions();
+</script>
+</body>
+</html>
